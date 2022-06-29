@@ -1,5 +1,6 @@
 # Notes on installing VNC for multi-user use
-Following are notes on installing multi-user VNC on Ubuntu 20.04
+Following are notes on installing multi-user VNC on Ubuntu 20.04.
+This will enable multiple users with their own desktop environments to concurrently connect remotely and do what they please. 
 
 
 ## Disclaimers

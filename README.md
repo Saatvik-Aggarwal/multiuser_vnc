@@ -4,7 +4,7 @@ Following are notes on installing multi-user VNC on Ubuntu 20.04
 
 ## Disclaimers
 
-* This configuration isn't the most secure.  When a user logs in, they are temporarily assigned a VNC port to use.  Anyone (knowing the password) can connect to that same port.  Since this configuration uses SSSD for authentication, I believe that this issue is negated but can't yet prove it.
+* This configuration isn't the most secure.  When a user logs in, they are temporarily assigned a VNC port to use.  Anyone (knowing the password) can connect to that same port. 
 
 ## Steps
 

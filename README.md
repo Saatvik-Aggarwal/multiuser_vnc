@@ -1,10 +1,6 @@
 # Notes on installing VNC for multi-user use
-Following are notes on installing multi-user VNC on Kali 2018.3.
+Following are notes on installing multi-user VNC on Ubuntu 20.04
 
-## Assumptions
-
-* sssd already configured to allow logins
-* oddjob-mkhomedir is also installed to automatically create users' home directories if they don't exist
 
 ## Disclaimers
 
@@ -18,12 +14,14 @@ Following are notes on installing multi-user VNC on Kali 2018.3.
 apt-get install tigervnc-standalone-server
 ```
 
-2) Edit /etc/gdm3/daemon.conf and add the following two lines to the xdmcp section
+2) Edit /etc/gdm3/custom.conf and add the following four lines to the xdmcp section. Change "6" to however many you need. 
 
 ```c
 [xdmcp]
 Enable=true
 Port=177
+MaxSessions=6
+DisplaysPerHost=6
 ```
 
 3) Restart the display manger by running:
@@ -38,9 +36,8 @@ systemctl restart gdm
 tigervncserver
 tigervncserver -kill :1
 ```
-***Note:*** Above should not be needed for multi-user mode.
 
-5) Create /etc/systemd/system/xvnc.socker with the following content:
+5) Create /etc/systemd/system/xvnc.socket with the following content:
 
 ```c
 [Unit]
@@ -74,26 +71,5 @@ systemctl enable xvnc.socket
 systemctl start xvnc.socket
 ```
 
-## Troubleshooting
-
-1) If a "Session declined: Maximum Number of Sessions Reached" error is returned, try adding the following line to the xdmcp section of /etc/gdm3/daemon.conf
-
-```c
-MaxSessions=2
-```
-
-2) If the login screen is flickering or crashing, try removing gnome-sell via:
-
-```c
-apt-get purge gnome-shell
-```
-
-***Note:*** this is untested but carried over from the source, just in case.
-
-3) Just a point to note: if you're running vnc in a VM (depending on the number of users), you may need to add memory and processors to the VM, to handle the resource consumption.
-
-## Sources
-
-* https://wiki.archlinux.org/index.php/XDMCP (specifically the gdm section)
-* https://wiki.archlinux.org/index.php/TigerVNC (specifically the multi-user section)
+You should be done!
 
